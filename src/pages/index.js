@@ -1,17 +1,20 @@
-import { getSession, useSession, signIn, signOut } from "next-auth/react";
+// import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { getSession, getServerSession, useSession, signIn, signOut } from "next-auth/react";
 import React, { useState, useEffect, ReactNode } from "react";
 
 import { NextPage, GetServerSideProps } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import Layout from "@/components/layouts/layout";
-import { isAuthenticated } from "../lib/utils/isAuthenticated";
 
-const Home = () => {
+import Layout from "@/components/layouts/layout";
+import { isAuthenticated } from "@/lib/utils/isAuthenticated";
+import { getTopTracksShort } from "@/lib/spotify";
+
+const Home = ({ topTracks }) => {
   const { data: session, status } = useSession();
   const image_url = session?.user?.image;
 
-  // console.log(topTracks)
+  // console.log(topTracks);
 
   return (
     <>
@@ -53,13 +56,21 @@ const Home = () => {
   );
 };
 
-export const getServerSideProps = async (ctx) => {
+export async function getServerSideProps(ctx) {
+  // const session = await getSession(ctx);
   const session = await getSession(ctx);
+
+  if (!session) {
+    return { props: {} };
+  }
+
+  const topTracks = await getTopTracksShort(session);
+
   return {
     props: {
-      session,
+      topTracks,
     },
   };
-};
+}
 
 export default Home;
