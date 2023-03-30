@@ -7,6 +7,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 import Layout from "@/components/layouts/layout";
+import TopTrackList from "@/components/page/index/TopTrackList";
+
 import { isAuthenticated } from "@/lib/utils/isAuthenticated";
 import { getTopTracksShort } from "@/lib/spotify";
 
@@ -48,6 +50,7 @@ const Home = ({ topTracks }) => {
                   Log out
                 </button>
               </div>
+              <TopTrackList tracks={topTracks.items} />
             </section>
           </Layout>
         </>
