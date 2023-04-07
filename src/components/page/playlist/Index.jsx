@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function Index({ playlists }) {
+export default function PlayListIndex({ playlists }) {
   // console.log(playlists);
   return (
     <div className="grid grid-cols-5">
