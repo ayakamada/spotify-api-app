@@ -14,6 +14,12 @@ export const TOP_ARTISTS_ENDPOINT_SHORT = `https://api.spotify.com/v1/me/top/art
 // spotify api endpoint to get users top albums
 export const USER_PLAYLIST_ENDPOINT = `https://api.spotify.com/v1/me/playlists`;
 
+
+export const PLAYLISTS_ENDPOINT = `https://api.spotify.com/v1/playlists`;
+
+
+
+// HELPERS ------------------------------------------------------------------------------
 const fetcher = async (url, session) => {
   const res = await axios
     .get(url, {
@@ -26,13 +32,15 @@ const fetcher = async (url, session) => {
   return res;
 };
 
-// エンドポイント"TOP_TRACKS_ENDPOINT_SHORT"からトラック情報を取得する
+
+
 //  * Get a User's Top Tracks
 //  * https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
 //  */
 export const getTopTracksShort = async (session) => {
   return fetcher(TOP_TRACKS_ENDPOINT_SHORT, session);
 };
+
 
 /**
  * Get a User's Top Artists
@@ -42,10 +50,19 @@ export const getTopArtistsShort = async (session) => {
   return fetcher(TOP_ARTISTS_ENDPOINT_SHORT, session);
 };
 
+
 /**
- * Get a User's Top Artists
- * https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
+ * Get a User's Playlist
+ *  * https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
  */
 export const getUserPlayList = async (session) => {
   return fetcher(USER_PLAYLIST_ENDPOINT, session);
+};
+
+/**
+ * Get a Playlist
+ * https://developer.spotify.com/documentation/web-api/reference/get-playlist
+ */
+export const getPlayList = async (playlistId, session) => {
+  return fetcher(`${PLAYLISTS_ENDPOINT}/${playlistId}`, session);
 };
