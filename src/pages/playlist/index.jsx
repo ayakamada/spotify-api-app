@@ -9,7 +9,7 @@ import { getUserPlayList } from "@/lib/spotify";
 
 import PlayListIndex from "@/components/page/playlist/Index";
 
-const PlayList = ({ UserPlayList }) => {
+const Index = ({ UserPlayList }) => {
   const { data: session, status } = useSession();
 
   // console.log(topTracks);
@@ -45,4 +45,4 @@ export async function getServerSideProps(ctx) {
   };
 }
 
-export default PlayList;
+export default Index;
