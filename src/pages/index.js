@@ -7,12 +7,12 @@ import Link from "next/link";
 import Image from "next/image";
 
 import Layout from "@/components/layouts/layout";
-import TopTrackList from "@/components/page/index/TopTrackList";
+import UserSummary from "@/components/page/index/UserSummary";
 
 import { isAuthenticated } from "@/lib/utils/isAuthenticated";
-import { getTopTracksShort } from "@/lib/spotify";
+import { getTopTracksShort, getTopArtistsShort } from "@/lib/spotify";
 
-const Home = ({ topTracks }) => {
+const Home = ({ topTracks, topArtists }) => {
   const { data: session, status } = useSession();
   const image_url = session?.user?.image;
 
@@ -50,7 +50,7 @@ const Home = ({ topTracks }) => {
                   Log out
                 </button>
               </div>
-              <TopTrackList tracks={topTracks.items} />
+              <UserSummary tracks={topTracks.items} artists={topArtists.items} />
             </section>
           </Layout>
         </>
@@ -60,7 +60,6 @@ const Home = ({ topTracks }) => {
 };
 
 export async function getServerSideProps(ctx) {
-  // const session = await getSession(ctx);
   const session = await getSession(ctx);
 
   if (!session) {
@@ -68,10 +67,12 @@ export async function getServerSideProps(ctx) {
   }
 
   const topTracks = await getTopTracksShort(session);
+  const topArtists = await getTopArtistsShort(session);
 
   return {
     props: {
       topTracks,
+      topArtists,
     },
   };
 }
