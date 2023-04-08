@@ -14,10 +14,7 @@ export const TOP_ARTISTS_ENDPOINT_SHORT = `https://api.spotify.com/v1/me/top/art
 // spotify api endpoint to get users top albums
 export const USER_PLAYLIST_ENDPOINT = `https://api.spotify.com/v1/me/playlists`;
 
-
 export const PLAYLISTS_ENDPOINT = `https://api.spotify.com/v1/playlists`;
-
-
 
 // HELPERS ------------------------------------------------------------------------------
 const fetcher = async (url, session) => {
@@ -32,15 +29,12 @@ const fetcher = async (url, session) => {
   return res;
 };
 
-
-
 //  * Get a User's Top Tracks
 //  * https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
 //  */
 export const getTopTracksShort = async (session) => {
   return fetcher(TOP_TRACKS_ENDPOINT_SHORT, session);
 };
-
 
 /**
  * Get a User's Top Artists
@@ -49,7 +43,6 @@ export const getTopTracksShort = async (session) => {
 export const getTopArtistsShort = async (session) => {
   return fetcher(TOP_ARTISTS_ENDPOINT_SHORT, session);
 };
-
 
 /**
  * Get a User's Playlist
@@ -65,4 +58,43 @@ export const getUserPlayList = async (session) => {
  */
 export const getPlayList = async (playlistId, session) => {
   return fetcher(`${PLAYLISTS_ENDPOINT}/${playlistId}`, session);
+};
+
+/**
+ * Get a Playlist items
+ *https://developer.spotify.com/documentation/web-api/reference/get-playlists-tracks
+ */
+export const getPlayListItems = async (playlistId, session) => {
+  const limit = 100;
+  let offset = 0;
+  let allTracks = [];
+
+  async function getTracks() {
+    try {
+      let response = await axios.get(`${PLAYLISTS_ENDPOINT}/${playlistId}/tracks`, {
+        headers: {
+          Authorization: "Bearer " + session.accessToken,
+        },
+        params: {
+          limit: limit,
+          offset: offset,
+        },
+      });
+
+      allTracks = allTracks.concat(response.data.items);
+      offset += limit;
+
+      if (response.data.next !== null) {
+        await getTracks(); // make another request if there are more tracks
+      } else {
+        // console.log(allTracks); // log all tracks once we have them all
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+    return allTracks;
+  }
+
+  return getTracks();
 };
