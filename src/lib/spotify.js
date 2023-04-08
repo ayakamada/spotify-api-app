@@ -17,6 +17,7 @@ export const USER_PLAYLIST_ENDPOINT = `https://api.spotify.com/v1/me/playlists`;
 export const PLAYLISTS_ENDPOINT = `https://api.spotify.com/v1/playlists`;
 
 // HELPERS ------------------------------------------------------------------------------
+
 const fetcher = async (url, session) => {
   const res = await axios
     .get(url, {
@@ -71,23 +72,18 @@ export const getPlayListItems = async (playlistId, session) => {
 
   async function getTracks() {
     try {
-      let response = await axios.get(`${PLAYLISTS_ENDPOINT}/${playlistId}/tracks`, {
-        headers: {
-          Authorization: "Bearer " + session.accessToken,
-        },
-        params: {
-          limit: limit,
-          offset: offset,
-        },
-      });
+      let response = await fetcher(
+        `${PLAYLISTS_ENDPOINT}/${playlistId}/tracks?limit=${limit}&offset=${offset}`,
+        session
+      );
 
-      allTracks = allTracks.concat(response.data.items);
+      allTracks = allTracks.concat(response.items);
       offset += limit;
 
-      if (response.data.next !== null) {
+      if (response.next !== null) {
         await getTracks(); // make another request if there are more tracks
       } else {
-        // console.log(allTracks); // log all tracks once we have them all
+        console.log(allTracks); // log all tracks once we have them all
       }
     } catch (error) {
       console.error(error);
