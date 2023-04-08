@@ -62,7 +62,7 @@ export const getPlayList = async (playlistId, session) => {
 };
 
 /**
- * Get a Playlist items
+ * Get All Playlist items
  *https://developer.spotify.com/documentation/web-api/reference/get-playlists-tracks
  */
 export const getPlayListItems = async (playlistId, session) => {
