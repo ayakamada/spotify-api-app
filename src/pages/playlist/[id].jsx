@@ -10,6 +10,7 @@ import { getPlayList, getPlayListItems } from "@/lib/spotify";
 
 const PlayList = ({ PlayList, PlayListItems }) => {
   const { data: session, status } = useSession();
+    console.log(PlayList);
 
   return (
     <>
@@ -20,7 +21,7 @@ const PlayList = ({ PlayList, PlayListItems }) => {
           <Layout>
             <PlayListHeader playlist={PlayList} />
             <div className="grid grid-cols-2">
-              <PlaylistItems tracks={PlayList.tracks.items} />
+              <PlaylistItems tracks={PlayList.tracks} />
               <ListAnalyze tracks={PlayListItems} />
             </div>
           </Layout>
