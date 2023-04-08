@@ -6,9 +6,9 @@ import PlayListHeader from "@/components/page/playlist/PlaylistHeader";
 import PlaylistItems from "@/components/page/playlist/PlaylistItems";
 import ListAnalyze from "@/components/Analyze/ListAnalyze";
 
-import { getPlayList } from "@/lib/spotify";
+import { getPlayList, getPlayListItems } from "@/lib/spotify";
 
-const PlayList = ({ PlayList }) => {
+const PlayList = ({ PlayList, PlayListItems }) => {
   const { data: session, status } = useSession();
 
   return (
@@ -21,7 +21,7 @@ const PlayList = ({ PlayList }) => {
             <PlayListHeader playlist={PlayList} />
             <div className="grid grid-cols-2">
               <PlaylistItems tracks={PlayList.tracks.items} />
-              <ListAnalyze tracks={PlayList.tracks.items} />
+              <ListAnalyze tracks={PlayListItems} />
             </div>
           </Layout>
         </>
@@ -39,10 +39,12 @@ export async function getServerSideProps(context) {
   }
 
   const PlayList = await getPlayList(playlistId, session);
+  const PlayListItems = await getPlayListItems(playlistId, session);
 
   return {
     props: {
       PlayList,
+      PlayListItems,
     },
   };
 }
