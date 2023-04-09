@@ -61,6 +61,7 @@ export const getPlayList = async (playlistId, session) => {
   return fetcher(`${PLAYLISTS_ENDPOINT}/${playlistId}`, session);
 };
 
+// TODO: separete the function later
 /**
  * Get All Playlist items
  *https://developer.spotify.com/documentation/web-api/reference/get-playlists-tracks
@@ -83,7 +84,7 @@ export const getPlayListItems = async (playlistId, session) => {
       if (response.next !== null) {
         await getTracks(); // make another request if there are more tracks
       } else {
-        console.log(allTracks); // log all tracks once we have them all
+        // console.log(allTracks); // log all tracks once we have them all
       }
     } catch (error) {
       console.error(error);
@@ -93,4 +94,22 @@ export const getPlayListItems = async (playlistId, session) => {
   }
 
   return getTracks();
+};
+
+/**
+ * Returns a comma-separated list of track ids.
+ *
+ * @param {Array.<Object>} tracks - An array of track objects.
+ * @returns {string} A comma-separated list of track ids.
+ */
+
+const getTrackIds = (tracks) => tracks.map(({ track }) => track.id).join(",");
+
+/**
+ * Get Audio Features for Several Tracks
+ * https://developer.spotify.com/documentation/web-api/reference/get-several-audio-features
+ */
+export const getAudioFeaturesForTracks = async (tracks, session) => {
+  const ids = getTrackIds(tracks);
+  return await fetcher(`https://api.spotify.com/v1/audio-features?ids=${ids}`, session);
 };
