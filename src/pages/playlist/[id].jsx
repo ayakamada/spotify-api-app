@@ -6,6 +6,7 @@ import Login from "@/components/Login";
 import PlayListHeader from "@/components/page/playlist/PlaylistHeader";
 import PlaylistItems from "@/components/page/playlist/PlaylistItems";
 import ListAnalyze from "@/components/Analyze/ListAnalyze";
+import FeatureChart from "@/components/Chart/FeatureChart";
 
 import { getPlayList, getPlayListItems, getAudioFeaturesForTracks } from "@/lib/spotify";
 
@@ -24,8 +25,8 @@ const PlayList = ({ playlistId, PlayList, PlayListItems, AudioFeatures }) => {
           <Layout>
             <PlayListHeader playlist={PlayList} />
             <div className="grid grid-cols-2">
+              <FeatureChart features={audioFeatures.audio_features} />
               <PlaylistItems tracks={PlayList.tracks} />
-              <ListAnalyze features={audioFeatures} />
             </div>
           </Layout>
         </>
