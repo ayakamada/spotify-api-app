@@ -1,15 +1,11 @@
 // import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { getSession, getServerSession, useSession, signIn, signOut } from "next-auth/react";
-import React, { useState, useEffect, ReactNode } from "react";
-
-import { NextPage, GetServerSideProps } from "next";
-import Link from "next/link";
-import Image from "next/image";
+import React from "react";
+import { getSession, useSession, signOut } from "next-auth/react";
 
 import Layout from "@/components/layouts/layout";
+import Login from "@/components/Login";
 import UserSummary from "@/components/page/index/UserSummary";
 
-import { isAuthenticated } from "@/lib/utils/isAuthenticated";
 import { getTopTracksShort, getTopArtistsShort } from "@/lib/spotify";
 
 const Home = ({ topTracks, topArtists }) => {
@@ -20,21 +16,7 @@ const Home = ({ topTracks, topArtists }) => {
 
   return (
     <>
-      {!session && (
-        <>
-          <main className="flex h-screen w-screen items-center justify-center bg-black text-center">
-            <div>
-              <h1 className="font-sans tracking-wide text-white">Spotify App</h1>
-              <button
-                onClick={() => signIn("spotify", { callbackUrl: "/" })}
-                className="mt-5 rounded-full bg-green p-4 font-sans tracking-wide text-white"
-              >
-                LOGIN TO SPOTIFY
-              </button>
-            </div>
-          </main>
-        </>
-      )}
+      {!session && <Login />}
 
       {status === "authenticated" && (
         <>

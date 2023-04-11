@@ -1,6 +1,6 @@
 import Image from "next/image";
-import TrackList from "@/components/track/TrackList";
-import ArtistList from "@/components/artist/ArtistList";
+import TrackList from "@/components/TrackList";
+import ArtistList from "@/components/ArtistList";
 
 
 export default function UserSummary({ tracks, artists }) {
