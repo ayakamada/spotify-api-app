@@ -1,24 +1,30 @@
 import React from "react";
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
-import { parsePitchClass } from "@/lib/utils/index";
+import { Treemap, ResponsiveContainer, CustomizedContent } from "recharts";
+import { keyMap } from "@/lib/const/keyMap";
 
 const KeyChart = ({ features }) => {
-  const chartData = features.map((feature) => ({
-    key: feature.key,
-    pitch: parsePitchClass(feature.key),
-  }));
-
-  // console.log(chartData);
+  const chartData = keyMap.map((key, i) => {
+    const count = features.filter((feature) => feature.key === i).length;
+    return {
+      name: key,
+      children: [{ name: key, size: count }],
+    };
+  });
 
   return (
+    //Treemapの中身
     <div className="w-full h-full">
-      <ScatterChart width={600} height={400}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="key" />
-        <YAxis dataKey="pitch" />
-        <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-        <Scatter name="Audio Features" data={chartData} fill="#8884d8" />
-      </ScatterChart>
+      <ResponsiveContainer width="100%" height="100%">
+        <Treemap
+          width={400}
+          height={200}
+          data={chartData}
+          dataKey="size"
+          aspectRatio={4 / 3}
+          stroke="#fff"
+          fill="#8884d8"
+        />
+      </ResponsiveContainer>
     </div>
   );
 };
