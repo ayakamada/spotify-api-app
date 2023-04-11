@@ -17,7 +17,7 @@ const PlayList = ({ playlistId, PlayList, PlayListItems, AudioFeatures }) => {
   const { data: session, status } = useSession();
   const [audioFeatures, setAudioFeatures] = useState(AudioFeatures);
 
-  // console.log(audioFeatures);
+  // console.log(PlayListItems);
 
   return (
     <>
@@ -29,10 +29,10 @@ const PlayList = ({ playlistId, PlayList, PlayListItems, AudioFeatures }) => {
             <PlayListHeader playlist={PlayList} />
             <div className="flex">
               <div className="flex items-center flex-col justify-start">
-                <FeatureChart features={audioFeatures.audio_features} />
-                <TempoChart features={audioFeatures.audio_features} />
-                <KeyChart features={audioFeatures.audio_features} />
-                <ModeChart features={audioFeatures.audio_features} />
+                <FeatureChart features={audioFeatures} />
+                <TempoChart features={audioFeatures} />
+                <KeyChart features={audioFeatures} />
+                <ModeChart features={audioFeatures} />
               </div>
               <div className="grid grid-cols-2">
                 <PlaylistItems tracks={PlayList.tracks} />
@@ -55,7 +55,8 @@ export async function getServerSideProps(context) {
 
   const PlayList = await getPlayList(playlistId, session);
   const PlayListItems = await getPlayListItems(playlistId, session);
-  const AudioFeatures = await getAudioFeaturesForTracks(PlayListItems, session);
+  const AudioFeaturesArr = await getAudioFeaturesForTracks(PlayListItems, session);
+  const AudioFeatures = [].concat(...AudioFeaturesArr);
 
   return {
     props: {
