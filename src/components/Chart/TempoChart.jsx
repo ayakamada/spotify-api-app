@@ -2,7 +2,7 @@ import React from "react";
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const TempoChart = ({ features }) => {
-  const tempos = features.map((feature) => feature.tempo);
+  const tempos = features.map((feature) => feature?.tempo);
   const roundedTempos = tempos.map((tempo) => Math.round(tempo));
 
   const tempoRanges = [];
@@ -12,7 +12,7 @@ const TempoChart = ({ features }) => {
 
   const tempoCounts = new Array(tempoRanges.length).fill(0);
   features.forEach((feature) => {
-    const tempo = feature.tempo;
+    const tempo = feature?.tempo;
     for (let i = 0; i < tempoRanges.length; i++) {
       const [minTempo, maxTempo] = tempoRanges[i].split("-").map(Number);
       if (tempo >= minTempo && tempo <= maxTempo) {

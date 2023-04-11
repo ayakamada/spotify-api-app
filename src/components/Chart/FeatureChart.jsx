@@ -21,7 +21,8 @@ export default function FeatureChart({ features }) {
   // 各プロパティの合計を計算する
   const propertySums = useMemo(() => {
     return properties.reduce((sums, property) => {
-      const propertySum = features.reduce((acc, item) => acc + item[property.key], 0);
+      const propertySum = features.reduce((acc, item) => acc + (item?.[property.key] || 0), 0);
+
       return { ...sums, [property.key]: propertySum };
     }, {});
   }, [features, properties]);

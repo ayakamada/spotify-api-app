@@ -5,7 +5,7 @@ import { keyMap } from "@/lib/const/keyMap";
 const KeyChart = ({ features }) => {
   // const COLORS = ["#8889DD", "#9597E4", "#8DC77B", "#A5D297", "#E2CF45", "#F8C12D"];
   const chartData = keyMap.map((key, i) => {
-    const count = features.filter((feature) => feature.key === i).length;
+    const count = features.filter((feature) => feature?.key === i).length;
     return {
       name: key,
       children: [{ name: key, size: count }],

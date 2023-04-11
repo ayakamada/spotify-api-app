@@ -8,7 +8,7 @@ const ModeChart = ({ features }) => {
   //featuresを回して、modeを0or1でカウントする
   const modeCount = features.reduce(
     (acc, feature) => {
-      if (feature.mode === 0) {
+      if (feature?.mode === 0) {
         acc[0] += 1;
       } else {
         acc[1] += 1;
