@@ -18,12 +18,14 @@ export const PLAYLISTS_ENDPOINT = `https://api.spotify.com/v1/playlists`;
 
 // HELPERS ------------------------------------------------------------------------------
 
-const fetcher = async (url, session) => {
+const fetcher = async (url, session, params = {}) => {
+  // console.log(params);
   const res = await axios
     .get(url, {
       headers: {
         Authorization: `Bearer ${session.accessToken}`,
       },
+      params: params,
     })
     .then((r) => r.data);
 
@@ -67,16 +69,16 @@ export const getPlayList = async (playlistId, session) => {
  *https://developer.spotify.com/documentation/web-api/reference/get-playlists-tracks
  */
 export const getPlayListItems = async (playlistId, session) => {
-  const limit = 100;
+  const limit = 50;
   let offset = 0;
   let allTracks = [];
 
   async function getTracks() {
     try {
-      let response = await fetcher(
-        `${PLAYLISTS_ENDPOINT}/${playlistId}/tracks?limit=${limit}&offset=${offset}`,
-        session
-      );
+      let response = await fetcher(`${PLAYLISTS_ENDPOINT}/${playlistId}/tracks`, session, {
+        limit: limit,
+        offset: offset,
+      });
 
       allTracks = allTracks.concat(response.items);
       offset += limit;
@@ -110,6 +112,17 @@ const getTrackIds = (tracks) => tracks.map(({ track }) => track.id).join(",");
  * https://developer.spotify.com/documentation/web-api/reference/get-several-audio-features
  */
 export const getAudioFeaturesForTracks = async (tracks, session) => {
-  const ids = getTrackIds(tracks);
-  return await fetcher(`https://api.spotify.com/v1/audio-features?ids=${ids}`, session);
+  const audioFeatures = [];
+  const limit = 50;
+
+  for (let i = 0; i < tracks.length; i += limit) {
+    const ids = tracks
+      .map(({ track }) => track.id)
+      .slice(i, i + limit)
+      .join(",");
+    const response = await fetcher(`https://api.spotify.com/v1/audio-features?ids=${ids}`, session);
+    audioFeatures.push(...response.audio_features);
+  }
+
+  return audioFeatures;
 };
