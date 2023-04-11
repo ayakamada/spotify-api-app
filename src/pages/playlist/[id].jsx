@@ -25,10 +25,14 @@ const PlayList = ({ playlistId, PlayList, PlayListItems, AudioFeatures }) => {
         <>
           <Layout>
             <PlayListHeader playlist={PlayList} />
-            <div className="grid grid-cols-2">
-              <FeatureChart features={audioFeatures.audio_features} />
-              <KeyChart features={audioFeatures.audio_features} />
-              <PlaylistItems tracks={PlayList.tracks} />
+            <div className="flex">
+              <div className="flex items-center flex-col justify-start">
+                <FeatureChart features={audioFeatures.audio_features} />
+                <KeyChart features={audioFeatures.audio_features} />
+              </div>
+              <div className="grid grid-cols-2">
+                <PlaylistItems tracks={PlayList.tracks} />
+              </div>
             </div>
           </Layout>
         </>
