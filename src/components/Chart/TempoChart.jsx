@@ -4,21 +4,11 @@ import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Resp
 const TempoChart = ({ features }) => {
   const tempos = features.map((feature) => feature.tempo);
   const roundedTempos = tempos.map((tempo) => Math.round(tempo));
-  const minTempo = Math.min(...roundedTempos);
-  const maxTempo = Math.max(...roundedTempos);
 
-  // const tempRange = Array.from({ length: maxTempo - minTempo + 1 }, (_, i) => minTempo + i);
   const tempoRanges = [];
   for (let i = 50; i <= 200; i += 10) {
     tempoRanges.push(`${i}-${i + 10}`);
   }
-
-  const data = features.map((feature, index) => {
-    return {
-      name: `Track ${index + 1}`,
-      bpm: feature.tempo,
-    };
-  });
 
   const tempoCounts = new Array(tempoRanges.length).fill(0);
   features.forEach((feature) => {
