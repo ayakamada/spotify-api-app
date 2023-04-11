@@ -40,7 +40,7 @@ export default function FeatureChart({ features }) {
   }, [features, properties, propertyAverages]);
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full">
       <RadarChart cx={300} cy={200} outerRadius={150} width={600} height={400} data={chartData}>
         <PolarGrid />
         <PolarAngleAxis dataKey="label" />
