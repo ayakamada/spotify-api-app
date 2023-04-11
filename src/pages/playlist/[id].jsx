@@ -8,6 +8,7 @@ import PlaylistItems from "@/components/page/playlist/PlaylistItems";
 import ListAnalyze from "@/components/Analyze/ListAnalyze";
 import FeatureChart from "@/components/Chart/FeatureChart";
 import KeyChart from "@/components/Chart/KeyChart";
+import ModeChart from "@/components/Chart/ModeChart";
 
 import { getPlayList, getPlayListItems, getAudioFeaturesForTracks } from "@/lib/spotify";
 
@@ -29,6 +30,7 @@ const PlayList = ({ playlistId, PlayList, PlayListItems, AudioFeatures }) => {
               <div className="flex items-center flex-col justify-start">
                 <FeatureChart features={audioFeatures.audio_features} />
                 <KeyChart features={audioFeatures.audio_features} />
+                <ModeChart features={audioFeatures.audio_features} />
               </div>
               <div className="grid grid-cols-2">
                 <PlaylistItems tracks={PlayList.tracks} />
