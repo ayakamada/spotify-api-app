@@ -2,7 +2,7 @@
 import React from "react";
 import { getSession, useSession, signOut } from "next-auth/react";
 
-import Layout from "@/components/layouts/layout";
+import Layout from "@/components/layouts/Layout";
 import Login from "@/components/Login";
 import UserSummary from "@/components/page/index/UserSummary";
 

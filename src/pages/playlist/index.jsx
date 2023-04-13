@@ -2,7 +2,7 @@
 import { getSession, useSession } from "next-auth/react";
 import React from "react";
 
-import Layout from "@/components/layouts/layout";
+import Layout from "@/components/layouts/Layout";
 import Login from "@/components/Login";
 
 import { getUserPlayList } from "@/lib/spotify";

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getSession, useSession } from "next-auth/react";
 
-import Layout from "@/components/layouts/layout";
+import Layout from "@/components/layouts/Layout";
 import Login from "@/components/Login";
 import PlayListHeader from "@/components/page/playlist/PlaylistHeader";
 import PlaylistItems from "@/components/page/playlist/PlaylistItems";
