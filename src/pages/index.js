@@ -1,6 +1,6 @@
 // import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import React from "react";
-import { getSession, signOut } from "next-auth/react";
+import React, { useEffect, useState } from "react";
+import { getSession, useSession } from "next-auth/react";
 
 import Layout from "@/components/layouts/Layout";
 
@@ -9,11 +9,13 @@ import UserSummary from "@/components/page/index/UserSummary";
 import { getTopTracksShort, getTopArtistsShort } from "@/lib/spotify";
 
 const Home = ({ topTracks, topArtists }) => {
+  const { data: session } = useSession();
+
   return (
     <>
       <Layout>
         <section className="">
-          <UserSummary tracks={topTracks.items} artists={topArtists.items} />
+          <UserSummary tracks={topTracks?.items} artists={topArtists?.items} />
         </section>
       </Layout>
     </>
