@@ -18,6 +18,17 @@ export default function Header({ profileImage, userName }) {
           </button>
         </div>
       </header>
+      <nav className="mb-20">
+        <ul className="w-[90%] mx-auto">
+          <li>
+            <Link href="/playlist">
+              <div className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full inline-block cursor-pointer">
+                PlayList
+              </div>
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </>
   );
 }
