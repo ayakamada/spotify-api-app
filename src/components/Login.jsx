@@ -7,7 +7,7 @@ export default function Login() {
         <h1 className="font-sans tracking-wide text-white">Spotify App</h1>
         <button
           onClick={() => signIn("spotify", { callbackUrl: "/" })}
-          className="mt-5 rounded-full bg-green p-4 font-sans tracking-wide text-white"
+          className="mt-5 rounded-full bg-[#1DB954] p-4 font-sans tracking-wide text-white"
         >
           LOGIN TO SPOTIFY
         </button>
