@@ -14,12 +14,13 @@ export default function Layout({ children }) {
   if (status === "loading") {
     return <Loading />;
   }
+
   return (
     <>
       {!session && <Login />}
 
       {status === "authenticated" && (
-        <div className="bg-black text-white h-full">
+        <div className="bg-black text-white h-full tracking-normal">
           <Header profileImage={imageUrl} userName={userName} />
           <main>{children}</main>
           <Footer />
