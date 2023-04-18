@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function PlayListIndex({ playlists }) {
   // console.log(playlists);
   return (
-    <div className="pb-32">
+    <div className="py-32">
       <div className="grid grid-cols-5 gap-8 w-[90%] mx-auto">
         {playlists.map((list) => (
           <div key={list.id} className="">
