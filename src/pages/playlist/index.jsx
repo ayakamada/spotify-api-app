@@ -10,22 +10,10 @@ import { getUserPlayList } from "@/lib/spotify";
 import PlayListIndex from "@/components/page/playlist/Index";
 
 const Index = ({ UserPlayList }) => {
-  const { data: session, status } = useSession();
-
-  // console.log(topTracks);
-
   return (
-    <>
-      {!session && <Login />}
-
-      {status === "authenticated" && (
-        <>
-          <Layout>
-            <PlayListIndex playlists={UserPlayList.items} />
-          </Layout>
-        </>
-      )}
-    </>
+    <Layout>
+      <PlayListIndex playlists={UserPlayList.items} />
+    </Layout>
   );
 };
 
