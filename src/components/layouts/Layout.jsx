@@ -8,21 +8,21 @@ import Loading from "@/components/Loading";
 export default function Layout({ children }) {
   const { data: session, status } = useSession();
 
+
   if (status === "loading") {
     return <Loading />;
   }
 
-  return (
-    <>
-      {!session && <Login />}
+  if (!session) {
+    return <Login />;
+  }
 
-      {status === "authenticated" && (
-        <div className="bg-black text-white h-full tracking-normal">
-          <Header profileImage={imageUrl} userName={userName} />
-          <main>{children}</main>
-          <Footer />
-        </div>
-      )}
-    </>
-  );
+  if (status === "authenticated") {
+    return (
+      <div className="bg-black text-white h-full tracking-normal">
+        <main>{children}</main>
+        <Footer />
+      </div>
+    );
+  }
 }
