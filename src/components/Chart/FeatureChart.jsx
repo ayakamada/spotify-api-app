@@ -17,12 +17,14 @@ export default function FeatureChart({ features }) {
     ],
     []
   );
+  // console.log(features);
 
   // 各プロパティの合計を計算する
   const propertySums = useMemo(() => {
     return properties.reduce((sums, property) => {
       const propertySum = features.reduce((acc, item) => acc + (item?.[property.key] || 0), 0);
 
+      // console.log(property);
       return { ...sums, [property.key]: propertySum };
     }, {});
   }, [features, properties]);
@@ -41,8 +43,9 @@ export default function FeatureChart({ features }) {
   }, [features, properties, propertyAverages]);
 
   return (
-    <div className="w-full">
-      <RadarChart cx={300} cy={200} outerRadius={150} width={600} height={400} data={chartData}>
+    <div className="w-full text-center">
+      <h2>Features</h2>
+      <RadarChart cx="50%" cy="50%" outerRadius="70%" width={500} height={400} data={chartData} className="mx-auto">
         <PolarGrid />
         <PolarAngleAxis dataKey="label" />
         <PolarRadiusAxis />

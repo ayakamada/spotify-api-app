@@ -28,21 +28,25 @@ const TempoChart = ({ features }) => {
   }, []);
 
   return (
-    <BarChart
-      width={500}
-      height={300}
-      data={tempoData}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5,
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <Bar dataKey="count" fill="#8884d8" />
-    </BarChart>
+    <div className="w-full text-center">
+      <h2>BPM</h2>
+      <BarChart
+        width={500}
+        height={400}
+        data={tempoData}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+        className="mx-auto"
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <Bar dataKey="count" fill="#8884d8" />
+      </BarChart>
+    </div>
   );
 };
 
