@@ -14,34 +14,30 @@ import TempoChart from "@/components/Chart/TempoChart";
 import { getPlayList, getPlayListItems, getAudioFeaturesForTracks } from "@/lib/spotify";
 
 const PlayList = ({ playlistId, PlayList, PlayListItems, AudioFeatures }) => {
-  const { data: session, status } = useSession();
   const [audioFeatures, setAudioFeatures] = useState(AudioFeatures);
 
   // console.log(PlayListItems);
 
   return (
-    <>
-      {!session && <Login />}
-
-      {status === "authenticated" && (
-        <>
-          <Layout>
-            <PlayListHeader playlist={PlayList} />
-            <div className="flex">
-              <div className="flex items-center flex-col justify-start">
-                <FeatureChart features={audioFeatures} />
-                <TempoChart features={audioFeatures} />
-                <KeyChart features={audioFeatures} />
-                <ModeChart features={audioFeatures} />
-              </div>
-              <div className="grid grid-cols-2">
-                <PlaylistItems tracks={PlayList.tracks} />
-              </div>
-            </div>
-          </Layout>
-        </>
-      )}
-    </>
+    <Layout>
+      <div className="w-[90%] mx-auto">
+        <PlayListHeader playlist={PlayList} audioFeatures={audioFeatures} />
+        <div className="flex items-center flex-col justify-center ">
+          <div className="flex w-full py-12">
+            <FeatureChart features={audioFeatures} />
+            <TempoChart features={audioFeatures} />
+          </div>
+          {/* <div>
+            <KeyChart features={audioFeatures} />
+            <ModeChart features={audioFeatures} />
+          </div> */}
+          <div className="w-full">
+            <h3 className="mb-6">TRACK LIST</h3>
+            <PlaylistItems tracks={PlayList.tracks} />
+          </div>
+        </div>
+      </div>
+    </Layout>
   );
 };
 
