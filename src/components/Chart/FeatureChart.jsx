@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from "recharts";
+import { ResponsiveContainer, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from "recharts";
 
 export default function FeatureChart({ features }) {
   const [chartData, setChartData] = useState([]);
@@ -43,14 +43,15 @@ export default function FeatureChart({ features }) {
   }, [features, properties, propertyAverages]);
 
   return (
-    <div className="w-full text-center">
-      <h2>Features</h2>
-      <RadarChart cx="50%" cy="50%" outerRadius="70%" width={500} height={400} data={chartData} className="mx-auto">
-        <PolarGrid />
-        <PolarAngleAxis dataKey="label" />
-        <PolarRadiusAxis />
-        <Radar name="Audio Features" dataKey="value" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
-      </RadarChart>
-    </div>
+    <ResponsiveContainer width="100%" height="320">
+      <div className="w-full text-center">
+        <RadarChart outerRadius="70%" width={320} height={320} data={chartData} className="mx-auto">
+          <PolarGrid />
+          <PolarAngleAxis dataKey="label" />
+          <PolarRadiusAxis />
+          <Radar name="Audio Features" dataKey="value" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+        </RadarChart>
+      </div>
+    </ResponsiveContainer>
   );
 }
