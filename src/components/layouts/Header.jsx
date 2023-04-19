@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { signOut } from "next-auth/react";
+import Nav from "@/components/Navigation";
 
 export default function Header({ profileImage, userName }) {
   return (
     <>
-      <header className="pt-16 text-center mb-20 w-[90%] mx-auto flex justify-between">
+      <header className="pt-16 text-center w-[90%] mx-auto flex justify-between">
         <div className="flex justify-start items-center">
           <img src={profileImage} className="h-32 w-32 rounded-full object-cover mr-10" alt="profil" />
           <h1 className="py-5 text-5xl">{userName} </h1>
@@ -18,17 +18,7 @@ export default function Header({ profileImage, userName }) {
           </button>
         </div>
       </header>
-      <nav className="mb-20">
-        <ul className="w-[90%] mx-auto">
-          <li>
-            <Link href="/playlist">
-              <div className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full inline-block cursor-pointer">
-                PlayList
-              </div>
-            </Link>
-          </li>
-        </ul>
-      </nav>
+      <Nav />
     </>
   );
 }
