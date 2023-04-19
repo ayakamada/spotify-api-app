@@ -31,13 +31,11 @@ const TempoChart = ({ features }) => {
     <div className="w-full text-center">
       <h2>BPM</h2>
       <BarChart
-        width={500}
+        width={320}
         height={400}
         data={tempoData}
         margin={{
           top: 5,
-          right: 30,
-          left: 20,
           bottom: 5,
         }}
         className="mx-auto"
