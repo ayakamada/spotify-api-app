@@ -3,6 +3,8 @@ import { getSession, useSession } from "next-auth/react";
 import React from "react";
 
 import Layout from "@/components/layouts/Layout";
+import Nav from "@/components/Navigation";
+
 import Login from "@/components/Login";
 
 import { getUserPlayList } from "@/lib/spotify";
@@ -12,6 +14,7 @@ import PlayListIndex from "@/components/page/playlist/Index";
 const Index = ({ UserPlayList }) => {
   return (
     <Layout>
+      <Nav />
       <PlayListIndex playlists={UserPlayList.items} />
     </Layout>
   );
