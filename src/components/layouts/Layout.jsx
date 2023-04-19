@@ -8,7 +8,6 @@ import Loading from "@/components/Loading";
 export default function Layout({ children }) {
   const { data: session, status } = useSession();
 
-
   if (status === "loading") {
     return <Loading />;
   }
