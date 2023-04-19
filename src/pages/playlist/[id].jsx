@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { getSession, useSession } from "next-auth/react";
 
 import Layout from "@/components/layouts/Layout";
+import Nav from "@/components/Navigation";
+
 import Login from "@/components/Login";
 import PlayListHeader from "@/components/page/playlist/PlaylistHeader";
 import PlaylistItems from "@/components/page/playlist/PlaylistItems";
@@ -20,22 +22,28 @@ const PlayList = ({ playlistId, PlayList, PlayListItems, AudioFeatures }) => {
 
   return (
     <Layout>
+      <Nav />
       <div className="w-[90%] mx-auto">
-        <PlayListHeader playlist={PlayList} audioFeatures={audioFeatures} />
-        <div className="flex items-center flex-col justify-center ">
-          <div className="flex w-full py-12">
+        <div className="flex-col sm:flex-row flex items-start gap-8">
+          <div className="sm:w-1/3  w-full grow self-stretch max-h-80 h-80">
+            <PlayListHeader playlist={PlayList} audioFeatures={audioFeatures} />
+          </div>
+          <div className="grow self-stretch max-h-80 ">
             <FeatureChart features={audioFeatures} />
+          </div>
+        </div>
+        <div className="flex items-start flex-col sm;flex-row w-full py-12 gap-8">
+          <div className="sm:w-1/3 w-full order-2 sm:order-1 sm:min-w-[450px] shrink-0">
+            <PlaylistItems tracks={PlayList.tracks} />
+          </div>
+          <div className="shrink w-full">
             <TempoChart features={audioFeatures} />
           </div>
-          {/* <div>
+        </div>
+        {/* <div>
             <KeyChart features={audioFeatures} />
             <ModeChart features={audioFeatures} />
           </div> */}
-          <div className="w-full">
-            <h3 className="mb-6">TRACK LIST</h3>
-            <PlaylistItems tracks={PlayList.tracks} />
-          </div>
-        </div>
       </div>
     </Layout>
   );
