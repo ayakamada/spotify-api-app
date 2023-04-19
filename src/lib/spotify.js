@@ -38,6 +38,12 @@ const fetcher = async (url, session, params = {}) => {
 export const getTopTracksShort = async (session) => {
   return fetcher(TOP_TRACKS_ENDPOINT_SHORT, session);
 };
+export const getTopTracksMedium = async (session) => {
+  return fetcher(TOP_TRACKS_ENDPOINT_MEDIUM, session);
+};
+export const getTopTracksLong = async (session) => {
+  return fetcher(TOP_TRACKS_ENDPOINT_LONG, session);
+};
 
 /**
  * Get a User's Top Artists
