@@ -17,12 +17,12 @@ function TitleLink({ title, linkUrl }) {
 export default function UserSummary({ tracks, artists }) {
   return (
     <div className="grid grid-cols-2">
-      <section className="mx-auto">
+      <section className="mx-auto w-full">
         <TitleLink title="Top Tracks" linkUrl="/tracks" />
         <TrackList tracks={tracks} />
       </section>
 
-      <section className=" mx-auto">
+      <section className=" mx-auto w-full">
         <TitleLink title="Top Artists" linkUrl="/artists" />
         <ArtistList artists={artists} />
       </section>
