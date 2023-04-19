@@ -1,5 +1,5 @@
 // import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { getSession, useSession } from "next-auth/react";
 
 import Layout from "@/components/layouts/Layout";
@@ -10,7 +10,7 @@ import Login from "@/components/Login";
 
 import UserSummary from "@/components/page/index/UserSummary";
 
-import { getTopTracksShort, getTopArtistsShort } from "@/lib/spotify";
+import { getTopTracksShort, getTopArtistsShort, getTopTracksMedium, getTopTracksLong } from "@/lib/spotify";
 
 const Home = ({ topTracks, topArtists, User }) => {
   const { data: session } = useSession();
@@ -19,21 +19,44 @@ const Home = ({ topTracks, topArtists, User }) => {
 
   const [tracks, setTracks] = useState(topTracks);
   const [artists, setArtists] = useState(topArtists);
+  const [activeTerm, setActiveTerm] = useState("short");
+
+  const changeTerm = async (term) => {
+    const data = await fetchTracks(session, term);
+    setTracks(data);
+    setActiveTerm(term);
+  };
+
+  const fetchTracks = async (session, term) => {
+    if (term === "short") {
+      return await getTopTracksShort(session);
+    } else if (term === "medium") {
+      return await getTopTracksMedium(session);
+    } else if (term === "long") {
+      return await getTopTracksLong(session);
+    }
+  };
+
+  const handleClick = (term) => changeTerm(term);
 
   useEffect(() => {
     setTracks(topTracks);
     setArtists(topArtists);
   }, [topTracks, topArtists]);
 
+  useEffect(() => {
+    if (!session) return;
+    fetchTracks();
+  }, [activeTerm, session]);
+
   return (
     <>
       <Layout>
         <Header profileImage={imageUrl} userName={userName} />
-
         <section className="w-[90%] mx-auto">
           <div className="align-right text-right">
             <div></div>
-            <SelectTerm />
+            <SelectTerm activeTerm={activeTerm} handleClick={handleClick} />
           </div>
           <UserSummary tracks={tracks?.items} artists={artists?.items} />
         </section>
