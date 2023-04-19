@@ -1,17 +1,15 @@
-export default function SelectTerm() {
+export default function SelectTerm({ activeTerm, handleClick }) {
   return (
-    <div className="dropdown dropdown-end">
-      <label tabIndex={0} className="btn m-1">
-        SELECT TERM
-      </label>
-      <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 text-black">
-        <li>
-          <a>SHORT</a>
-        </li>
-        <li>
-          <a>LONG</a>
-        </li>
-      </ul>
+    <div className="btn-group">
+      <button className={`btn ${activeTerm === "short" ? "btn-active" : ""}`} onClick={() => handleClick("short")}>
+        SHORT
+      </button>
+      <button className={`btn ${activeTerm === "medium" ? "btn-active" : ""}`} onClick={() => handleClick("medium")}>
+        MEDIUM
+      </button>
+      <button className={`btn ${activeTerm === "long" ? "btn-active" : ""}`} onClick={() => handleClick("long")}>
+        LONG
+      </button>
     </div>
   );
 }
