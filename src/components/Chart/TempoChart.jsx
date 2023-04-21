@@ -28,7 +28,7 @@ const TempoChart = ({ features }) => {
   }, []);
 
   return (
-    <div className="w-full text-center">
+    <div className="w-full text-center mx-auto">
       <h2>BPM</h2>
       <BarChart
         width={320}

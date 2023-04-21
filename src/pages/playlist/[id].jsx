@@ -24,19 +24,19 @@ const PlayList = ({ playlistId, PlayList, PlayListItems, AudioFeatures }) => {
     <Layout>
       <Nav />
       <div className="w-[90%] mx-auto">
-        <div className="flex-col sm:flex-row flex items-start gap-8">
-          <div className="sm:w-1/3  w-full grow self-stretch max-h-80 h-80">
+        <div className="flex-col grid-cols-1 items-start gap-8 grid sm:grid-cols-2">
+          <div className="w-full grow self-stretch max-h-80 h-80">
             <PlayListHeader playlist={PlayList} audioFeatures={audioFeatures} />
           </div>
           <div className="grow self-stretch max-h-80 ">
             <FeatureChart features={audioFeatures} />
           </div>
         </div>
-        <div className="flex items-start flex-col sm;flex-row w-full py-12 gap-8">
-          <div className="sm:w-1/3 w-full order-2 sm:order-1 sm:min-w-[450px] shrink-0">
+        <div className="flex-col grid-cols-1 items-start gap-8 grid sm:grid-cols-2 py-12">
+          <div className="grow w-full order-2 sm:order-1 shrink-0">
             <PlaylistItems tracks={PlayList.tracks} />
           </div>
-          <div className="shrink w-full">
+          <div className="shrink w-full order-1 sm:order-2">
             <TempoChart features={audioFeatures} />
           </div>
         </div>

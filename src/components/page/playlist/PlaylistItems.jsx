@@ -12,7 +12,7 @@ export default function PlayListItems({ tracks }) {
           <div className="mr-6 relative w-12 h-12 shrink-0">
             <Image src={item.track.album.images[0].url} alt="" fill className="object-contain mx-auto " />
           </div>
-          <div>
+          <div className="mr-3">
             <h3 className="font-bold">{item.track.name}</h3>
             <div className="text-gray-300">{item.track.artists[0].name}</div>
           </div>
