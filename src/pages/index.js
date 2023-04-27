@@ -10,7 +10,7 @@ import Login from "@/components/Login";
 
 import UserSummary from "@/components/page/index/UserSummary";
 
-import { getTopTracksShort, getTopArtistsShort, getTopTracksMedium, getTopTracksLong } from "@/lib/spotify";
+import { getTopTracksShort, getTopArtistsShort, fetchTracks, fetchArtists } from "@/lib/spotify";
 
 const Home = ({ topTracks, topArtists, User }) => {
   const { data: session } = useSession();
@@ -22,19 +22,19 @@ const Home = ({ topTracks, topArtists, User }) => {
   const [activeTerm, setActiveTerm] = useState("short");
 
   const changeTerm = async (term) => {
-    const data = await fetchTracks(session, term);
-    setTracks(data);
     setActiveTerm(term);
+    changeTracksData(term);
+    changeArtistsData(term);
   };
 
-  const fetchTracks = async (session, term) => {
-    if (term === "short") {
-      return await getTopTracksShort(session);
-    } else if (term === "medium") {
-      return await getTopTracksMedium(session);
-    } else if (term === "long") {
-      return await getTopTracksLong(session);
-    }
+  const changeTracksData = async (term) => {
+    const data = await fetchTracks(session, term);
+    setTracks(data);
+  };
+
+  const changeArtistsData = async (term) => {
+    const data = await fetchArtists(session, term);
+    setArtists(data);
   };
 
   const handleClick = (term) => changeTerm(term);
@@ -46,8 +46,7 @@ const Home = ({ topTracks, topArtists, User }) => {
 
   useEffect(() => {
     if (!session) return;
-    fetchTracks();
-  }, [activeTerm, session]);
+  }, [session]);
 
   return (
     <>
