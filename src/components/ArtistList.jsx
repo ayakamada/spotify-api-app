@@ -10,7 +10,7 @@ export default function ArtistList({ artists }) {
               <Image
                 src={artist.images[0].url}
                 alt=""
-                responsive
+                // responsive
                 className="object-cover mx-auto rounded-full w-24 h-24 "
                 width={artist.images[0].width}
                 height={artist.images[0].height}
