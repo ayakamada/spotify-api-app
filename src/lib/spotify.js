@@ -54,6 +54,12 @@ export const getTopTracksLong = async (session) => {
 export const getTopArtistsShort = async (session) => {
   return fetcher(TOP_ARTISTS_ENDPOINT_SHORT, session);
 };
+export const getTopArtistsMedium = async (session) => {
+  return fetcher(TOP_ARTISTS_ENDPOINT_MEDIUM, session);
+};
+export const getTopArtistsLong = async (session) => {
+  return fetcher(TOP_ARTISTS_ENDPOINT_LONG, session);
+};
 
 /**
  * Get a User's Playlist
