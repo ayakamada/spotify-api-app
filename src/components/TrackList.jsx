@@ -11,7 +11,7 @@ export default function TrackList({ tracks }) {
               <Image
                 src={track.album.images[0].url}
                 alt=""
-                responsive
+                // responsive
                 className="object-cover mx-auto w-24 h-24 "
                 width={track.album.images[0].width}
                 height={track.album.images[0].height}

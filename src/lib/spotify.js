@@ -10,6 +10,8 @@ export const TOP_TRACKS_ENDPOINT_LONG = `https://api.spotify.com/v1/me/top/track
 
 // artist
 export const TOP_ARTISTS_ENDPOINT_SHORT = `https://api.spotify.com/v1/me/top/artists?limit=50&time_range=short_term`; //last 4 weeks
+export const TOP_ARTISTS_ENDPOINT_MEDIUM = `https://api.spotify.com/v1/me/top/artists?limit=50&time_range=medium_term`; //last 4 weeks
+export const TOP_ARTISTS_ENDPOINT_LONG = `https://api.spotify.com/v1/me/top/artists?limit=50&time_range=long_term`; //last 4 weeks
 
 // spotify api endpoint to get users top albums
 export const USER_PLAYLIST_ENDPOINT = `https://api.spotify.com/v1/me/playlists`;
@@ -45,12 +47,38 @@ export const getTopTracksLong = async (session) => {
   return fetcher(TOP_TRACKS_ENDPOINT_LONG, session);
 };
 
+export const fetchTracks = async (session, term) => {
+  if (term === "short") {
+    return await getTopTracksShort(session);
+  } else if (term === "medium") {
+    return await getTopTracksMedium(session);
+  } else if (term === "long") {
+    return await getTopTracksLong(session);
+  }
+};
+
 /**
  * Get a User's Top Artists
  * https://developer.spotify.com/documentation/web-api/reference/get-users-top-artists-and-tracks
  */
 export const getTopArtistsShort = async (session) => {
   return fetcher(TOP_ARTISTS_ENDPOINT_SHORT, session);
+};
+export const getTopArtistsMedium = async (session) => {
+  return fetcher(TOP_ARTISTS_ENDPOINT_MEDIUM, session);
+};
+export const getTopArtistsLong = async (session) => {
+  return fetcher(TOP_ARTISTS_ENDPOINT_LONG, session);
+};
+
+export const fetchArtists = async (session, term) => {
+  if (term === "short") {
+    return await getTopArtistsShort(session);
+  } else if (term === "medium") {
+    return await getTopArtistsMedium(session);
+  } else if (term === "long") {
+    return await getTopArtistsLong(session);
+  }
 };
 
 /**

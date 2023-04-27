@@ -43,15 +43,13 @@ export default function FeatureChart({ features }) {
   }, [features, properties, propertyAverages]);
 
   return (
-    <ResponsiveContainer width="100%" height="320">
-      <div className="w-full text-center">
-        <RadarChart outerRadius="70%" width={320} height={320} data={chartData} className="mx-auto">
-          <PolarGrid />
-          <PolarAngleAxis dataKey="label" />
-          <PolarRadiusAxis />
-          <Radar name="Audio Features" dataKey="value" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
-        </RadarChart>
-      </div>
+    <ResponsiveContainer width="100%" height={300}>
+      <RadarChart cx="50%" cy="50%" outerRadius="90%" data={chartData} className="mx-auto w-full">
+        <PolarGrid />
+        <PolarAngleAxis dataKey="label" />
+        <PolarRadiusAxis />
+        <Radar name="Audio Features" dataKey="value" stroke="#8884d8" fill="#8884d8" fillOpacity={0.6} />
+      </RadarChart>
     </ResponsiveContainer>
   );
 }
