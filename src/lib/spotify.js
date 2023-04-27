@@ -10,6 +10,8 @@ export const TOP_TRACKS_ENDPOINT_LONG = `https://api.spotify.com/v1/me/top/track
 
 // artist
 export const TOP_ARTISTS_ENDPOINT_SHORT = `https://api.spotify.com/v1/me/top/artists?limit=50&time_range=short_term`; //last 4 weeks
+export const TOP_ARTISTS_ENDPOINT_MEDIUM = `https://api.spotify.com/v1/me/top/artists?limit=50&time_range=medium_term`; //last 4 weeks
+export const TOP_ARTISTS_ENDPOINT_LONG = `https://api.spotify.com/v1/me/top/artists?limit=50&time_range=long_term`; //last 4 weeks
 
 // spotify api endpoint to get users top albums
 export const USER_PLAYLIST_ENDPOINT = `https://api.spotify.com/v1/me/playlists`;
