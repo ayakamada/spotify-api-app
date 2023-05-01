@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { getSession, useSession } from "next-auth/react";
 
-import Layout from "@/components/layouts/Layout";
+import Layout from "@/components/Layouts/Layout";
 import Nav from "@/components/Navigation";
 
 import Login from "@/components/Login";
-import PlayListHeader from "@/components/page/playlist/PlaylistHeader";
-import PlaylistItems from "@/components/page/playlist/PlaylistItems";
+import PlayListHeader from "@/components/Page/playlist/PlaylistHeader";
+import PlaylistItems from "@/components/Page/playlist/PlaylistItems";
 import ListAnalyze from "@/components/Analyze/ListAnalyze";
 import FeatureChart from "@/components/Chart/FeatureChart";
 import KeyChart from "@/components/Chart/KeyChart";

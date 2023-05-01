@@ -2,13 +2,13 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { getSession, useSession } from "next-auth/react";
 
-import Layout from "@/components/layouts/Layout";
-import Header from "@/components/layouts/Header";
+import Layout from "@/components/Layouts/Layout";
+import Header from "@/components/Layouts/Header";
 import SelectTerm from "@/components/SelectTerm";
 import Loading from "@/components/Loading";
 import Login from "@/components/Login";
 
-import UserSummary from "@/components/page/index/UserSummary";
+import UserSummary from "@/components/Page/index/UserSummary";
 
 import { getTopTracksShort, getTopArtistsShort, fetchTracks, fetchArtists } from "@/lib/spotify";
 
