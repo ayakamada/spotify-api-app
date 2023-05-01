@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { getSession, useSession } from "next-auth/react";
 
-import Layout from "@/components/layouts/Layout";
+import Layout from "@/components/Layouts/Layout";
 import ArtistList from "@/components/ArtistList";
 
 import { getTopTracksShort, getTopArtistsShort } from "@/lib/spotify";
